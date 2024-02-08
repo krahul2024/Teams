@@ -1,0 +1,15 @@
+<div *ngIf="usersList.length > 0" class="user-list-main">
+    <span class="user-list-title">Share to...</span>
+    <div class="user-list">
+    <div *ngFor="let user of usersList; let i = index;">
+        <div class="user-profile" (click)="selectUser(user)">
+            <!-- <img src="{{user.}}" class="profile-image"  /> -->
+            <span class="user-initials-image">{{getUserImageFromName(user)}}</span>
+            <div class="profile-short-details">
+                <span class="display-name">{{user.displayName}}</span>
+                <span class="role">({{getUserShortName(user)}}) {{user.jobTitle}}</span>
+            </div>
+        </div>
+    </div>
+    </div>
+</div>

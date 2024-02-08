@@ -1,0 +1,44 @@
+<div class="">
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        Share To Teams
+    </button>
+
+    
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Share To Teams</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <div class="modal-body">
+                    <div>
+                    <label for="userSearch" class="form-label">Share with</label>
+                    <input class="form-control rounded-1" [(ngModel)]="searchTerm" id="userSearch" placeholder="Search using name..."
+                        (input)="filterUser()">
+                    <datalist id="userList">
+                        <option *ngFor="let user of filteredUsers" [value]="user.displayName">
+                            {{ user.displayName | json}}
+                        </option>
+                    </datalist>
+                    </div>
+                    <div class="">
+                        <label for="userSearch" class="form-label">Your message</label>
+                        <input class="form-control" [(ngModel)]="searchTerm" id="userSearch" placeholder="Search using name..."
+                            (input)="filterUser()">
+                        <datalist id="userList">
+                            <option *ngFor="let user of filteredUsers" [value]="user.displayName">
+                                {{ user.displayName | json}}
+                            </option>
+                        </datalist>
+                        </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary">Share</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
