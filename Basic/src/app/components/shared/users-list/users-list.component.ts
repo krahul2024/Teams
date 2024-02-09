@@ -8,7 +8,7 @@ import { users } from 'src/assets/data';
   styleUrls: ['./users-list.component.css']
 })
 export class UsersListComponent implements OnInit {
-  @Input() usersList: User[] = []
+  @Input() usersList!: User[] 
   @Output() selectedUser = new EventEmitter<User>();
 
   ngOnInit(): void {
@@ -16,11 +16,14 @@ export class UsersListComponent implements OnInit {
   }
 
   isValidUser(user: User): boolean {
+    console.log(user)
     if (!user) return false;
     return !!user.id && !!user.displayName;
   }
 
   selectUser(user: User) {
+    console.log('This is select user function.')
+    console.log(user)
     const isValid = this.isValidUser(user);
     if (isValid) {
       console.log(user);

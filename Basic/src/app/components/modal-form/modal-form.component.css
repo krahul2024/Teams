@@ -2,45 +2,7 @@
     padding: 10px;
 }
 
-.modal {
-    display: none;
-    flex-direction: column;
-    flex-grow: 1;
-    position: fixed;
-    z-index: 1000;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    max-width: 90%;
-    max-height: 90%;
-    overflow: auto;
-    /* Light gray background with some transparency */
-    transition: opacity 1s ease-in-out;
-    /* backdrop-filter: blur(10px); Apply blur effect to the background */
-}
-
-.modal-body {
-    position: relative;
-    /* Ensure relative positioning for the close button */
-    height: 84%;
-    width: 100%;
-}
-
-.modal-content {
-    /* margin: 0 auto; */
-    padding: 1px;
-    width: 100%;
-    height: 100%;
-    border-width: 1px;
-    border-radius: 6px;
-}
-
-.show {
-    display: block;
-    opacity: 1;
-}
-
-/* Open modal button */
+/*--------------Open/Close  modal button */
 .modal-open {
     overflow: hidden;
     /* Prevent scrolling of the background content when modal is open */
@@ -51,7 +13,6 @@
     color: white;
 }
 
-/* Close the modal button/icon */
 .modal-close {
     /* border: 2px solid red; */
     padding: 2px;
@@ -68,12 +29,54 @@
     color: darkblue;
 }
 
+/* ------------------------ Modal Styles ------------------------ */
+.modal {
+    display: none;
+    flex-direction: column;
+    flex-grow: 1;
+    position: fixed;
+    z-index: 1000;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 70%;
+    max-height: 80%;
+    overflow: auto;
+    transition: opacity 1s ease-in-out;
+    border: none;
+    /* border: 1px solid red; */
+    box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.18), 0 10px 20px 0 rgba(0, 0, 0, 0.17);
+}
+
+.modal-content {
+    /* margin: 0 auto; */
+    /* border: 1px solid red; */
+    padding: 1px;
+    width: 100%;
+    height: 100%;
+    border-width: 1px;
+    border-radius: 6px;
+}
+
+.modal-body {
+    position: relative;
+    /* Ensure relative positioning for the close button */
+    height: 77%;
+    /* border: 1px solid red; */
+    width: 100%;
+}
+
+.show {
+    display: block;
+    opacity: 1;
+}
+
 .modal-title-div {
     /* border: 1px solid rgb(8, 8, 248);  */
     margin-top: 2px;
     padding: 2px;
     display: flex;
-    justify-content: start;
+    justify-content: flex-start;
     align-items: center;
     background-color: white;
 }
@@ -95,31 +98,84 @@
 }
 
 .share-with-label {
-    /* padding: 2px; */
+    padding: 2px;
+    margin-bottom: 4px;
     position: relative;
     display: flex;
     font-size: small;
     flex-direction: column;
 }
+
+
+.selected-users-list-div {
+    height: 50px;
+    display: grid;
+    padding: 2px 4px;
+    overflow-y:scroll;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); /* Adjust column width as needed */
+    gap: 5px; 
+}
+.selected-user-div{
+    padding: 1px;
+    background-color: rgb(240, 240, 240);
+    display: flex;
+    border: 1px white solid;
+    border-radius: 20px;
+    flex-direction: row;
+}
+
+.selected-user-name {
+    padding: 2px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+}
+
+
+.selected-user-initials-image{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2px;
+    margin-right: 5px;
+    border: 1px solid white;
+    background-color: rgb(0, 0, 0, 0.3);
+    color: black;
+    font-weight: 600;
+    height: 28px;
+    width: 28px;
+    border-radius: 100%;
+}
+
 .filtered-results-container {
     position: absolute;
     width: 100%;
-    top: 103%; 
+    top: 103%;
     left: 0px;
-    z-index: 1; 
-    background-color: white; 
-    border: 1px solid white; 
+    z-index: 1;
+    background-color: white;
+    border: 1px solid white;
     border-top: none;
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
     box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.08), 0 10px 20px 0 rgba(0, 0, 0, 0.07);
 }
 
+.share-with-title{
+    margin: 6px 2px;
+}
 
+.share-with-div{
+    background-color: rgb(240, 240, 240);
+    display: flex;
+    flex-direction: column;
+}
 
 .share-with-input {
     margin-top: 8px;
-    padding: 4px 6px;
+    height: 18px;
+    resize: none;
     border: none;
     font-size: small;
     color: black;
@@ -134,12 +190,13 @@
 
 textarea {
     margin-top: 8px;
-    padding: 10px;
+    padding: 6px;
     resize: none;
     height: 90%;
     width: 100%;
     overflow-y: auto;
     border: none;
+    /* border: 1px solid blue; */
     font-size: small;
     color: black;
     background-color: rgb(240, 240, 240);
@@ -148,12 +205,108 @@ textarea {
 
 
 .share-message-main {
-    margin-top: 13px;
-    height: 89%;
+    /* border: 1px solid green; */
+    margin-top: 4px;
+    height: 68%;
 }
 
+
+/* ---------------------- File Attachment Section --------------------------- */
+
+.modal-attachment {
+    /* border: 1px solid yellow; */
+}
+
+
+.checkbox-input-label {
+    /* border: 1px solid red; */
+    display: flex;
+    margin: 0px 10px;
+    padding: 4px 6px;
+    align-items: center;
+    cursor: pointer;
+}
+
+.checkbox-input {
+    margin-right: 8px;
+    display: hidden;
+}
+
+.checkbox-title {
+    margin-bottom: 3px;
+    font-size: small;
+}
+
+.attachment-input-div{
+    display: flex;
+    padding: 4px 6px;
+    align-items: center;
+    /* border: 1px red solid; */
+}
+
+.attach-button {
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    border: none;
+    background-color: white;
+}
+
+.attach-button-label {
+    font-size: small;
+}
+
+.attach-file-icon {
+    padding: 4px;
+    margin-right: 4px;
+    height: 24px;
+    width: 24px;
+}
+
+.attachment-list-div {
+    display: grid;
+    padding: 2px 14px;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 2fr)); /* Adjust column width as needed */
+    gap: 5px; 
+}
+
+.view-file{
+    padding: 2px 4px;
+    display: flex;
+    /* border: 1px solid darkblue; */
+    background-color: rgb(240, 240, 240); 
+    justify-content: space-between; 
+    align-items: center;
+    border-radius: 2px;
+}
+
+a{
+    color: darkblue; 
+}
+
+
+.filename-label{
+    font-size: x-small;
+    margin-right: 8px;
+}
+
+.remove-filename-button{
+    border: none;
+    background-color: rgb(240, 240, 240); 
+    font-size: large;
+}
+
+.remove-filename-button:hover{
+    background-color: transparent;
+    color : rgb(187, 10, 13); 
+}
+
+
+/* ------------- Share/Cancel Button Section */
 .share-button-div {
+    /* border: 1px cyan solid; */
     padding: 0px 20px;
+    margin-bottom: 6px;
     display: flex;
     justify-content: flex-end;
     align-items: flex-end;
@@ -165,7 +318,7 @@ textarea {
     font-size: small;
     font-weight: 700;
     border: 2px;
-    color : rgb(140, 140, 140);
+    color: rgb(140, 140, 140);
     border-radius: 5px;
     cursor: not-allowed;
 }

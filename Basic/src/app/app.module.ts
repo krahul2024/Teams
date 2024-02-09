@@ -6,12 +6,14 @@ import { AppComponent } from './app.component';
 import { ModalFormComponent } from './components/modal-form/modal-form.component';
 import { FormsModule } from '@angular/forms';
 import { UsersListComponent } from './components/shared/users-list/users-list.component';
+import { TestUserListComponent } from './components/test-user-list/test-user-list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ModalFormComponent,
-    UsersListComponent
+    UsersListComponent,
+    TestUserListComponent
   ],
   imports: [
     BrowserModule,
