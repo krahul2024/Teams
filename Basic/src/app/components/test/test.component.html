@@ -1,0 +1,14 @@
+<div class="search-container">
+    <input type="text" [(ngModel)]="searchTerm" (input)="filterUsers()" placeholder="Search users...">
+    <div class="selected-users">
+      <span *ngFor="let selectedUser of selectedUsers">
+        {{ selectedUser.name }} <button (click)="removeUser(selectedUser)">x</button>
+      </span>
+    </div>
+    <div class="filtered-results">
+      <div *ngFor="let user of filteredUsers" (click)="selectUser(user)">
+        {{ user.name }}
+      </div>
+    </div>
+  </div>
+  

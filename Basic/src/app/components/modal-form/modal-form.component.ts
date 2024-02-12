@@ -32,8 +32,8 @@ export class ModalFormComponent {
 
   users: User[] = Users.slice(0, 20); // hard-coded list of users
 
-  filteredUsers: User[] = []
-  selectedUsers: User[] = []
+  filteredUsers: User[] = [];
+  selectedUsers: User[] = this.users.slice(0,7); 
   isTextareaFocused: boolean = false;
 
 
@@ -46,7 +46,8 @@ export class ModalFormComponent {
     this.filteredUsers = this.users.filter((user: User) => {
       const isValidTerm = this.searchTerm.length > 0;
       const userContainsTerm = user.displayName?.toLocaleLowerCase().includes(this.searchTerm);
-      return isValidTerm && userContainsTerm;
+      const alreadySelected = this.selectedUsers.some(selUser => selUser.displayName === user.displayName); 
+      return isValidTerm && userContainsTerm && !alreadySelected; 
     });
 
     // this.filteredUsers.map(user => console.log(user.displayName))
@@ -70,7 +71,8 @@ export class ModalFormComponent {
     this.includeAttachments = false;
     this.searchTerm = "";
     this.usersConcatenatedList = "";
-    this.filteredUsers = []
+    this.filteredUsers = []; 
+    this.selectedUsers = []; 
   }
 
   getSelectedUser(user: User) {
@@ -83,6 +85,14 @@ export class ModalFormComponent {
     console.log(this.usersConcatenatedList)
     this.filteredUsers = [];
     this.searchTerm = "";
+  }
+
+
+  //------------Remove the selected user 
+  removeSelectedUser(user : User) {
+    this.selectedUsers = this.selectedUsers.filter((selUser : User) => {
+      return user.displayName !== selUser.displayName; 
+    })
   }
 
   // ----------------Attachment operations 

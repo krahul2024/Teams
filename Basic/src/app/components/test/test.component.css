@@ -1,0 +1,35 @@
+.search-container {
+    position: relative;
+  }
+  
+  .selected-users {
+    margin-top: 5px;
+  }
+  
+  .selected-users span {
+    background-color: #f0f0f0;
+    padding: 2px 5px;
+    margin-right: 5px;
+    border-radius: 3px;
+  }
+  
+  .filtered-results {
+    position: absolute;
+    top: calc(100% + 5px);
+    left: 0;
+    z-index: 1;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    max-height: 150px;
+    overflow-y: auto;
+  }
+  
+  .filtered-results div {
+    padding: 5px;
+    cursor: pointer;
+  }
+  
+  .filtered-results div:hover {
+    background-color: #f0f0f0;
+  }
+  

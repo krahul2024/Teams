@@ -58,19 +58,27 @@
             <!-- Input for people selection -->
             <div class="share-with-label">
                 <span class="share-with-title">Share With</span>
-                <div class="share-with-div" [ngClass]="{'share-with-input-focus': isTextareaFocused}">
-                    <div *ngIf="selectedUsers.length > 0" class="selected-users-list-div">
-                        <div *ngFor="let user of selectedUsers; let i = index;">
+
+                <div class="share-with-div" [ngClass]="{
+                    'share-with-input-focus': isTextareaFocused, 
+                    'share-with-div-focus' : selectedUsers.length>0
+                    }">
+                    <!-- <div class="selected-users-list-div"> -->
+                        <div  *ngFor="let user of selectedUsers; let i = index;">
                             <div class="selected-user-div">
-                                <!-- <img src="{{user.}}" class="profile-image"  /> -->
-                                <span class="selected-user-initials-image">{{getUserImageFromName(user)}}</span>
-                                <span class="selected-user-name">{{truncateFilename(user.displayName || " ", ' ')}}</span>
+                                <div class="selected-user-profile">
+                                    <!-- <img src="{{user.}}" class="profile-image"  /> -->
+                                    <span class="selected-user-initials-image">{{getUserImageFromName(user)}}</span>
+                                    <span class="selected-user-name">{{truncateFilename(user.displayName || " ", ' ')}}</span>
+                                </div>
+                                <span class="remove-selected-user-icon" (click)="removeSelectedUser(user)">&times;</span>
                             </div>
                         </div>
-                    </div>
-                    <input [(ngModel)]="searchTerm" (input)="filterUser()" (blur)="onTextareaBlur()"
+                        <input [(ngModel)]="searchTerm" (input)="filterUser()" (blur)="onTextareaBlur()"
                         (focus)="onTextareaFocus()" class="share-with-input" />
+                    <!-- </div> -->
                 </div>
+
                 <div class="filtered-results-container">
                     <app-users-list [usersList]="filteredUsers" (selectedUser)="getSelectedUser($event)">
                     </app-users-list>
