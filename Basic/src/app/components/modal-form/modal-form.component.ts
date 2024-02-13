@@ -13,7 +13,7 @@ export class ModalFormComponent implements OnInit {
   @ViewChild('modalBody') modalRef! : ElementRef; 
   @ViewChild('modalOpen') modalOpenButtonRef! : ElementRef; 
 
-  showModal: boolean = true;
+  showModal: boolean = true ;
   enableShare: boolean = false;
   cancelSharing: boolean = false;
   includeAttachments: boolean = false;
