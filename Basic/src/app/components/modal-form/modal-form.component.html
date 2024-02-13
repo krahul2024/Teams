@@ -1,8 +1,8 @@
 <div class="main-div">
-    <button *ngIf="!showModal" class="modal-open" (click)="toggleModal()">Share to Teams</button>
+    <button #modalOpen *ngIf="!showModal" class="modal-open" (click)="toggleModal()">Share to Teams</button>
 
     <!-- Modal element -->
-    <div class="modal modal-content" [ngClass]="{'show': showModal}">
+    <div #modalBody class="modal modal-content" [ngClass]="{'show': showModal}">
         <div class="modal-title-div">
             <div>
                 <svg class="teams-icon" xmlns="http://www.w3.org/2000/svg"
@@ -62,24 +62,26 @@
                 <div class="share-with-div" [ngClass]="{
                     'share-with-input-focus': isTextareaFocused, 
                     'share-with-div-focus' : selectedUsers.length>0
-                    }" >
+                    }">
                     <!-- <div class="selected-users-list-div"> -->
-                        <div  *ngFor="let user of selectedUsers; let i = index;">
-                            <div class="selected-user-div">
-                                <div class="selected-user-profile">
-                                    <!-- <img src="{{user.}}" class="profile-image"  /> -->
-                                    <span class="selected-user-initials-image">{{getUserImageFromName(user)}}</span>
-                                    <span class="selected-user-name">{{user.displayName}}</span>
-                                </div>
-                                <span class="remove-selected-user-icon" (click)="removeSelectedUser(user)">&times;</span>
+                    <div *ngFor="let user of selectedUsers; let i = index;">
+                        <div class="selected-user-div">
+                            <div class="selected-user-profile">
+                                <!-- <img src="{{user.}}" class="profile-image"  /> -->
+                                <span class="selected-user-initials-image">{{getUserImageFromName(user)}}</span>
+                                <span class="selected-user-name">{{user.displayName}}</span>
                             </div>
+                            <span class="remove-selected-user-icon" (click)="removeSelectedUser(user)">&times;</span>
                         </div>
-                        <input [(ngModel)]="searchTerm" (input)="filterUser()" (blur)="onTextareaBlur()"
+                    </div>
+                    <input [(ngModel)]="searchTerm" (input)="filterUser()" (blur)="onTextareaBlur()"
                         (focus)="onTextareaFocus()" class="share-with-input" />
                     <!-- </div> -->
                 </div>
 
-                <div class="filtered-results-container">
+                <div (mouseenter)="onMouseEnter()" (mouseleave)="onMouseLeave()"
+                    *ngIf="searchTerm.length>0 && (focusedOnFilteredList || isTextareaFocused)" tabindex="0"
+                    class="filtered-results-container">
                     <app-users-list [usersList]="filteredUsers" (selectedUser)="getSelectedUser($event)">
                     </app-users-list>
                 </div>
@@ -99,10 +101,10 @@
         <div class="modal-attachment">
             <div *ngIf="attachments.length > 0 && includeAttachments" class="attachment-list-div">
                 <div *ngFor="let filename of attachments; let i = index; ">
-                    <div class="view-file" (click)="removeAttachment(filename)">
+                    <div class="view-file">
                         <a target="_blank" [href]="filename" class="filename-label">{{truncateFilename(filename,
                             '.')}}</a>
-                        <button class="remove-filename-button">&times;</button>
+                        <button class="remove-filename-button" (click)="removeAttachment(filename)">&times;</button>
                     </div>
                 </div>
             </div>
@@ -124,7 +126,7 @@
 
         <div class="share-button-div">
             <button class="action-btn-active" (click)="toggleModal()">Cancel</button>
-            <button class="action-btn" [ngClass]="{'action-btn-active' : enableShare}">Share</button>
+            <button class="action-btn" [ngClass]="{'action-btn-active' : selectedUsers.length > 0}">Share</button>
         </div>
     </div>
 </div>
