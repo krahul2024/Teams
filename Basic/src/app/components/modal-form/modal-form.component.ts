@@ -95,6 +95,14 @@ export class ModalFormComponent {
     })
   }
 
+  // ---------------- Calculate grid sizes for each item 
+  getGridTemplate(){
+    const gridTemplateCols = this.selectedUsers.map(user => `${(user.displayName || '').length * 7}px`).join(' '); 
+    console.log(gridTemplateCols)
+    return gridTemplateCols ; 
+  }
+
+
   // ----------------Attachment operations 
 
   toggleIncludeAttachments(): void {

@@ -114,17 +114,13 @@
     /* position: relative; */
     padding: 2px;
     background-color: rgb(240, 240, 240);
-    display: grid; 
-    grid-template-columns: repeat(auto-fit, 200px);
-    grid-gap: 2px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2px;
     overflow-y: hidden;
 }
 
 .share-with-div-focus{
-    background-color: rgb(240, 240, 240);
-    display: grid; 
-    grid-template-columns: repeat(auto-fit, minmax(145px));
-    flex-direction: column;
     height: 60px;
     overflow-y: scroll;
 }

@@ -62,14 +62,14 @@
                 <div class="share-with-div" [ngClass]="{
                     'share-with-input-focus': isTextareaFocused, 
                     'share-with-div-focus' : selectedUsers.length>0
-                    }">
+                    }" >
                     <!-- <div class="selected-users-list-div"> -->
                         <div  *ngFor="let user of selectedUsers; let i = index;">
                             <div class="selected-user-div">
                                 <div class="selected-user-profile">
                                     <!-- <img src="{{user.}}" class="profile-image"  /> -->
                                     <span class="selected-user-initials-image">{{getUserImageFromName(user)}}</span>
-                                    <span class="selected-user-name">{{truncateFilename(user.displayName || " ", ' ')}}</span>
+                                    <span class="selected-user-name">{{user.displayName}}</span>
                                 </div>
                                 <span class="remove-selected-user-icon" (click)="removeSelectedUser(user)">&times;</span>
                             </div>
