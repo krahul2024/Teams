@@ -194,11 +194,6 @@ export class ModalFormComponent implements OnInit {
   //---------------Share the message to teams
 
   shareToTeams(message : any){
-    // this function 
-    // list of users 
-    // some message with a list of attachments 
-
-    //
   }
 
   
