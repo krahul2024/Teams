@@ -22,7 +22,7 @@ jobs:
 
       - name: Sending to localhost
         run: |
-          curl -X POST -H "Content-Type: application/json" -d '{"git-event" : "${{toJson(github.event)}}"}' https://7528-121-241-162-10.ngrok-free.app/curl-check
+          curl -X POST -H "Content-Type: application/json" -d '{"git-event" : "${{github.event}}"}' https://7528-121-241-162-10.ngrok-free.app/curl-check
 
 
         
