@@ -14,6 +14,8 @@ if event_payload:
 
     # Get the path to the repository workspace
     workspace_path = os.environ.get('GITHUB_WORKSPACE')
+    print("Workspace path:", os.environ.get('GITHUB_WORKSPACE'))
+
 
     if workspace_path:
         # Construct the absolute path to the JSON file
