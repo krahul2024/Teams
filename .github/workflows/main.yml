@@ -1,4 +1,4 @@
-name: Automation Workflow
+name: Notify Teams Channel
 
 on:
   push:
@@ -6,38 +6,16 @@ on:
       - main
 
 jobs:
-  build:
+  notify:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Get commit details
-        id: commit_details
+      - name: Send notification to Teams
+        env:
+          TEAMS_WEBHOOK_URL: ${{ secrets.webhook_secret }}
         run: |
-          branch=$(git rev-parse --abbrev-ref HEAD)
-          before_commit=$(git rev-parse HEAD^)
-          after_commit=$(git rev-parse HEAD)
-          pusher_name=$(git log -1 --pretty=format:'%an')
-          pusher_email=$(git log -1 --pretty=format:'%ae')
-          compare_url=$(git log -1 --pretty=format:'https://github.com/${GITHUB_REPOSITORY}/compare/${before_commit}...${after_commit}')
-          commit_message=$(git log -1 --pretty=format:'%s')
-          commit_timestamp=$(git log -1 --pretty=format:'%cd' --date=format:'%m/%d/%Y %H:%M:%S')
-          commit_url=$(git log -1 --pretty=format:'https://github.com/${GITHUB_REPOSITORY}/commit/${after_commit}')
-          commit_author_name=$(git log -1 --pretty=format:'%an')
-          commit_author_email=$(git log -1 --pretty=format:'%ae')
-          commit_committer_name=$(git log -1 --pretty=format:'%cn')
-          commit_committer_email=$(git log -1 --pretty=format:'%ce')
-          modified_files=$(git diff-tree --no-commit-id --name-only -r $after_commit)
-
-          payload="{\"Branch\": \"${branch}\", \"Before Commit\": \"${before_commit}\", \"After Commit\": \"${after_commit}\", \"Pusher Name\": \"${pusher_name}\", \"Pusher Email\": \"${pusher_email}\", \"Compare URL\": \"${compare_url}\", \"Commit Message\": \"${commit_message}\", \"Commit Timestamp\": \"${commit_timestamp}\", \"Commit URL\": \"${commit_url}\", \"Commit Author Name\": \"${commit_author_name}\", \"Commit Author Email\": \"${commit_author_email}\", \"Commit Committer Name\": \"${commit_committer_name}\", \"Commit Committer Email\": \"${commit_committer_email}\", \"Modified Files\": \"${modified_files}\"}"
-
-          echo -n "$payload" > commit_details.json
-
-      - name: Send payload to API endpoint
-        run: |
-          curl -X POST \
-          -H "Content-Type: application/json" \
-          -d @commit_details.json \
-          https://7528-121-241-162-10.ngrok-free.app/curl-check
+          curl -X POST -H "Content-Type: application/json" -d '{
+            "text": "A new push has been made to the main branch. Details: Commit ID: ${{ github.sha }}, Commit Message: ${{ github.event.head_commit.message }}"
+          }' $TEAMS_WEBHOOK_URL
