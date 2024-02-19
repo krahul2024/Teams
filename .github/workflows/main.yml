@@ -3,34 +3,23 @@ name: Notify Teams Channel
 on:
   push:
     branches:
-      - main
+    - main
 
 jobs:
   notify:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
+    - name: Checkout repository
+      uses: actions/checkout@v2
 
-      - name: Set up Python
-        uses: actions/setup-python@v2
-        with:
-          python-version: '3.x'
+    - name: Substitute variables in template
+      run: |
+        commit_id=${{ github.sha }}
+        commit_message=${{ github.event.head_commit.message }}
+        sed -e "s/{commit_id}/$commit_id/" -e "s/{commit_message}/$commit_message/" template.json > message.json
 
-      - name: Send notification to Teams
-        env:
-          TEAMS_WEBHOOK_URL: ${{ secrets.webhook_secret }}
-        run: |
-          # Read the template JSON file
-          template=$(cat .github/workflows/template.json)
-
-          # Replace placeholders with actual values
-          text=$(echo "$template" | \
-            sed "s/\${{ github.sha }}/${{ github.sha }}/g" | \
-            sed "s/\${{ github.event.head_commit.message }}/${{ github.event.head_commit.message }}/g")
-
-          # Create a temporary JSON file with the updated text
-          echo "{\"text\": \"$text\"}" > updated_template.json
-
-          # Send the notification to Teams
-          curl -X POST -H "Content-Type: application/json" -d @updated_template.json $TEAMS_WEBHOOK_URL
+    - name: Send notification to Teams
+      env:
+        TEAMS_WEBHOOK_URL: ${{ secrets.webhook_secret }}
+      run: |
+        curl -X POST -H "Content-Type: application/json" -d @message.json $TEAMS_WEBHOOK_URL
