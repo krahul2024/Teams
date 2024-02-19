@@ -20,17 +20,17 @@ jobs:
       - name: Run Python script
         run: python .github/workflows/git_event_json.py
 
-      - name: Send notification to Teams
-        env:
-          TEAMS_WEBHOOK_URL: ${{ secrets.webhook_secret }}
-        run: |
-          curl -X POST -H "Content-Type: application/json" -d '{
-            "text": "A new push has been made to the main branch. Details: Commit ID: ${{ github.sha }}, Commit Message: ${{ github.event.head_commit.message }}"
-          }' $TEAMS_WEBHOOK_URL
+      # - name: Send notification to Teams
+      #   env:
+          # TEAMS_WEBHOOK_URL: ${{ secrets.webhook_secret }}
+      #   run: |
+          # curl -X POST -H "Content-Type: application/json" -d '{
+          #   "text": "A new push has been made to the main branch. Details: Commit ID: ${{ github.sha }}, Commit Message: ${{ github.event.head_commit.message }}"
+          # }' $TEAMS_WEBHOOK_URL
 
-          curl -X POST -H "Content-Type: application/json" -d '{
-            "text": "A new push has been made to the main branch. Details: Commit ID: ${{ github.sha }}", "git_event": ${{ toJson(github.event)}}
-          }' https://7528-121-241-162-10.ngrok-free.app/curl-check
+          # curl -X POST -H "Content-Type: application/json" -d '{
+          #   "text": "A new push has been made to the main branch. Details: Commit ID: ${{ github.sha }}", "git_event": ${{ toJson(github.event)}}
+          # }' https://7528-121-241-162-10.ngrok-free.app/curl-check
 
         
 
