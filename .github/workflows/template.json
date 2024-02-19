@@ -11,7 +11,7 @@
         "body": [
           {
             "type": "TextBlock",
-            "text": "Details of Commit on 2024-02-19T11:54:14+05:30 at undefined",
+            "text": "Details of commit from the automation workflow",
             "weight": "Bolder",
             "wrap": true
           },
