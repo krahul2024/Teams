@@ -19,3 +19,10 @@ jobs:
           curl -X POST -H "Content-Type: application/json" -d '{
             "text": "A new push has been made to the main branch. Details: Commit ID: ${{ github.sha }}, Commit Message: ${{ github.event.head_commit.message }}"
           }' $TEAMS_WEBHOOK_URL
+
+      - name: Sending to localhost
+        run: |
+          curl -X POST -H "Content-Type: application/json" -d '{"git-event" : "${{toJson(github.event)}}"}' https://7528-121-241-162-10.ngrok-free.app/curl-check
+
+
+        
