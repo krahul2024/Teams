@@ -18,7 +18,7 @@ jobs:
           python-version: '3.x'
   
       - name: Run Python script
-        run: python git_event_json.py
+        run: python .github/workflows/git_event_json.py
 
       - name: Send notification to Teams
         env:
