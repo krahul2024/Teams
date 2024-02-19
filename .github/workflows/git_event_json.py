@@ -14,7 +14,7 @@ if event_payload:
     }
 
     
-    with open('event_data.json', 'w') as f:
+    with open('.github/workflows/event_data.json', 'w') as f:
         json.dump(variables, f, indent=4)
 else:
     print("No GitHub event payload found.")
