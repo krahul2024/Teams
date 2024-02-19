@@ -12,23 +12,20 @@ if event_payload:
         "sender": event_data.get('sender', {}).get('login'),
     }
 
-    # Get the path to the repository workspace
     workspace_path = os.environ.get('GITHUB_WORKSPACE')
-    print("Workspace path:", os.environ.get('GITHUB_WORKSPACE'))
-
+    print("Workspace path:", workspace_path)
 
     if workspace_path:
-        # Construct the absolute path to the JSON file
-        json_file_path = os.path.join(workspace_path, 'event_data.json')
+        destination_dir = os.path.join(workspace_path, '.github', 'workflows')
+        print(destination_dir); 
 
-        # Write variables to the JSON file
+        os.makedirs(destination_dir, exist_ok=True)
+        
+        json_file_path = os.path.join(destination_dir, 'event_data.json')
+
         with open(json_file_path, 'w') as f:
             json.dump(variables, f, indent=4)
     else:
         print("Unable to determine workspace path.")
 else:
     print("No GitHub event payload found.")
-
-
-
-# this is some thing
