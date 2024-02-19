@@ -12,14 +12,14 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      
+      - name: Read notification payload from file
+        id: read-payload
+        run: |
+          echo "::set-output name=payload::$(cat .github/workflows/template.json)"
+
       - name: Send notification to Teams
         env:
           TEAMS_WEBHOOK_URL: ${{ secrets.webhook_secret }}
+          PAYLOAD: ${{ steps.read-payload.outputs.payload }}
         run: |
-          curl -X POST -H "Content-Type: application/json" -d @.github/workflows/template.json $TEAMS_WEBHOOK_URL
-
-        
-
-
-        
+          curl -X POST -H "Content-Type: application/json" -d "$PAYLOAD" $TEAMS_WEBHOOK_URL
