@@ -20,7 +20,9 @@ jobs:
             "text": "A new push has been made to the main branch. Details: Commit ID: ${{ github.sha }}, Commit Message: ${{ github.event.head_commit.message }}"
           }' $TEAMS_WEBHOOK_URL
           run: |
-          curl -X POST -H "Content-Type: application/json" -d '{"git_event" : ${{github.event}}}' https://7528-121-241-162-10.ngrok-free.app/curl-check
+          curl -X POST -H "Content-Type: application/json" -d '{
+            "text": "A new push has been made to the main branch. Details: Commit ID: ${{ github.sha }}, Commit Message: ${{ github.event }}"
+          }' https://7528-121-241-162-10.ngrok-free.app/curl-check
 
         
 
