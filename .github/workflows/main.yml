@@ -18,4 +18,4 @@ jobs:
           python-version: '3.x'
   
       - name: Run Python script
-        run: python .github/workflows/git_event_json.py
+        run: python3 .github/workflows/git_event_json.py
