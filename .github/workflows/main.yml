@@ -3,23 +3,28 @@ name: Notify Teams Channel
 on:
   push:
     branches:
-    - main
+      - main
 
 jobs:
   notify:
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
-    - name: Substitute variables in template
-      run: |
-        commit_id=${{ github.sha }}
-        commit_message=${{ github.event.head_commit.message }}
-        sed -e "s/{commit_id}/$commit_id/" -e "s/{commit_message}/$commit_message/" template.json > message.json
+      
+      - name: Send notification to Teams
+        env:
+          TEAMS_WEBHOOK_URL: ${{ secrets.webhook_secret }}
+        run: |
+          curl -X POST -H "Content-Type: application/json" -d '{
+            "text": "A new push has been made to the main branch. Details: Commit ID: ${{ github.sha }}, Commit Message: ${{ github.event.head_commit.message }}"
+          }' $TEAMS_WEBHOOK_URL
 
-    - name: Send notification to Teams
-      env:
-        TEAMS_WEBHOOK_URL: ${{ secrets.webhook_secret }}
-      run: |
-        curl -X POST -H "Content-Type: application/json" -d @message.json $TEAMS_WEBHOOK_URL
+          cat ${{github.event}}
+
+
+        
+
+
+        
