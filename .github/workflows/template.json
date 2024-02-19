@@ -11,7 +11,7 @@
         "body": [
           {
             "type": "TextBlock",
-            "text": "Details of commit from the automation workflow",
+            "text": "Details of Commit",
             "weight": "Bolder",
             "wrap": true
           },
@@ -117,59 +117,73 @@
                     "items": [
                       {
                         "type": "TextBlock",
-                        "text": "refs/heads/main"
+                        "text": "${ref}",
+                        "wrap": true
                       },
                       {
                         "type": "TextBlock",
-                        "text": "3631d4854925846e4e023d9aaa390952f1f"
+                        "text": "${beforeHash}",
+                        "wrap": true
                       },
                       {
                         "type": "TextBlock",
-                        "text": "a90710c46c159c9304f2ae634edf76dfabb"
+                        "text": "${afterHash}",
+                        "wrap": true
                       },
                       {
                         "type": "TextBlock",
-                        "text": "krahul2024"
+                        "text": "${pusherName}",
+                        "wrap": true
                       },
                       {
                         "type": "TextBlock",
-                        "text": "sandipkumar2024@gmail.com"
+                        "text": "${pusherEmail}",
+                        "wrap": true
                       },
                       {
                         "type": "TextBlock",
-                        "text": "https://github.com/krahul2024/Teams/compare/3631d4854925...a90710c46c15"
+                        "text": "${compare}",
+                        "wrap": true
                       },
                       {
                         "type": "TextBlock",
-                        "text": "a90710c46c159c9304f2ae634edf76dfabbe4b15"
+                        "text": "${commitId}",
+                        "wrap": true
                       },
                       {
                         "type": "TextBlock",
-                        "text": "random change"
+                        "text": "${commitMessage}",
+                        "wrap": true
                       },
                       {
                         "type": "TextBlock",
-                        "text": "2024-02-19T11:54:14+05:30"
+                        "text": "${commitTimestamp}",
+                        "wrap": true
                       },
                       {
                         "type": "TextBlock",
-                        "text": "https://github.com/krahul2024/Teams/commit/a90710c46c159c9304f2ae634edf76dfabbe4b15"
+                        "text": "${commitUrl}",
+                        "wrap": true
                       },
                       {
                         "type": "TextBlock",
-                        "text": "Sah"
+                        "text": "${commitAuthorName}",
+                        "wrap": true
                       },
                       {
                         "type": "TextBlock",
-                        "text": "rasah@softwareag.com"
+                        "text": "${commitAuthorEmail}",
+                        "wrap": true
                       },
                       {
                         "type": "TextBlock",
-                        "text": "Sah"
+                        "text": "${commitCommitterName}",
+                        "wrap": true
                       },
                       {
                         "type": "TextBlock",
-                        "text": "rasah@softwareag.com"
+                        "text": "${commitCommitterEmail}",
+                        "wrap": true
                       }
                     ]
                   }
@@ -188,7 +202,7 @@
           },
           {
             "type": "TextBlock",
-            "text": "Basic/src/app/components/modal-form/modal-form.component.html",
+            "text": "${modified.join(', ')}",
             "wrap": true
           },
           {
@@ -197,7 +211,7 @@
               {
                 "type": "Action.OpenUrl",
                 "title": "View Commit Details",
-                "url": "https://github.com/krahul2024/Teams/commit/a90710c46c159c9304f2ae634edf76dfabbe4b15"
+                "url": "${commitUrl}"
               }
             ]
           }

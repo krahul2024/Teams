@@ -12,6 +12,14 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+  
+      - name: Run Python script
+        run: python generate_event_data.py
+
       - name: Send notification to Teams
         env:
           TEAMS_WEBHOOK_URL: ${{ secrets.webhook_secret }}
