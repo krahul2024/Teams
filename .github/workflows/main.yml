@@ -19,6 +19,3 @@ jobs:
   
       - name: Run Python script
         run: python .github/workflows/git_event_json.py
-
-
-        
