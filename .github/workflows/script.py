@@ -4,14 +4,7 @@ from typing import List, Dict
 
 # print(os.getcwd())
 
-# curr_dir = os.path.dirname(os.path.abspath(__file__))
-# files_curr_dir = os.listdir(curr_dir) 
-# json_path = os.path.join(curr_dir, 'payload.json')
-
-# print(files_curr_dir)
-
-# with open(json_path, "r") as file : 
-#     payload = file.read()
+# curr_dir = os.path.dirname(os.path.abspath(__file__)
 
 def get_message(payload: Dict) -> Dict:
     ref = payload['ref']
