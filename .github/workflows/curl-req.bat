@@ -1,7 +1,1 @@
-@echo off
-
-REM Run the Python script and capture its output
-for /f %%i in ('python test.py') do set "json_output=%%i"
-
-REM Post the JSON output to the specified URL using curl
-curl -X POST -H "Content-Type: application/json" --data-raw "%json_output%" http://localhost:4000/curl-check
+python script.py payload.json | curl -X POST -H "Content-Type: application/json" -d @- https://sagportal.webhook.office.com/webhookb2/fea331ef-e4e7-46b2-b6c1-0593f0ebe5ac@d9662eb9-ad98-4e74-a8a2-04ed5d544db6/IncomingWebhook/8c8453bc7b8b4517a6c9ba6cd8233d1b/535d63a1-ac25-4ea9-92a7-c9fc5afe3ee7

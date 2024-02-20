@@ -1,5 +1,17 @@
-import json, sys
+from datetime import datetime
+import json, sys, os
 from typing import List, Dict
+
+# print(os.getcwd())
+
+# curr_dir = os.path.dirname(os.path.abspath(__file__))
+# files_curr_dir = os.listdir(curr_dir) 
+# json_path = os.path.join(curr_dir, 'payload.json')
+
+# print(files_curr_dir)
+
+# with open(json_path, "r") as file : 
+#     payload = file.read()
 
 def get_message(payload: Dict) -> Dict:
     ref = payload['ref']
@@ -36,7 +48,7 @@ def get_message(payload: Dict) -> Dict:
                     "body": [
                         {
                             "type": "TextBlock",
-                            "text": f"Details of Commit on {commit_timestamp.split(' ')[0]} at {commit_timestamp.split(' ')[1]}",
+                            "text": f"Details of Commit on {datetime.fromisoformat(commit_timestamp)}",
                             "weight": "Bolder",
                             "wrap": True
                         },
@@ -109,6 +121,7 @@ def get_message(payload: Dict) -> Dict:
 
     return message
 
+# payload_json = json.loads(payload) 
 
 if __name__ == "__main__":
     event_data = sys.argv[1]
