@@ -16,9 +16,7 @@ jobs:
         env:
           TEAMS_WEBHOOK_URL: ${{ secrets.webhook_secret }}
         run: |
-          curl -X POST -H "Content-Type: application/json" -d '{
-            "text": "A new push has been made to the main branch. Details: Commit ID: ${{ github.sha }}, Commit Message: ${{ github.event.head_commit.message }}"
-          }' $TEAMS_WEBHOOK_URL
+          python @script.py ${{toJson(github.event)}} | curl -X POST -H "Content-Type: application/json" -d @- $TEAMS_WEBHOOK_URL
 
-      - name: Run Python script
-        run: python .github/workflows/script.py '${{ toJson(github.event) }}'
+      # - name: Run Python script
+      #   run: python .github/workflows/script.py '${{ toJson(github.event) }}'
