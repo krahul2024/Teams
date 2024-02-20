@@ -33,7 +33,6 @@ def get_message(payload: Dict) -> Dict:
     commit_committer_email = committer['email']
     before_hash = before[:-5]
     after_hash = after[:-5]
-    modified_files = head_commit['modified']
 
     message = {
         "type": "message",
@@ -105,8 +104,6 @@ def get_message(payload: Dict) -> Dict:
                             "bleed": True,
                             "border": True
                         },
-                        {"type": "TextBlock", "text": "Modified Files:", "weight": "Bolder", "wrap": True},
-                        *[{"type": "TextBlock", "text": file, "wrap": True} for file in modified_files],
                         {
                             "type": "ActionSet",
                             "actions": [
@@ -126,6 +123,6 @@ def get_message(payload: Dict) -> Dict:
 if __name__ == "__main__":
     event_data = sys.argv[1]
     event_data_json = json.loads(event_data)
-    # message = get_message(event_data_json
-    # print(json.dumps(message, indent=4))  
-    print(event_data_json)
+    message = get_message(event_data_json)
+    print(json.dumps(message, indent=4))  
+    # print(event_data_json)
