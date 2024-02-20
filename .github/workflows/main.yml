@@ -16,7 +16,7 @@ jobs:
         env:
           TEAMS_WEBHOOK_URL: ${{ secrets.webhook_secret }}
         run: |
-          python @script.py ${{toJson(github.event)}} | curl -X POST -H "Content-Type: application/json" -d @- $TEAMS_WEBHOOK_URL
+          python .github/workflows/script.py ${{toJson(github.event)}} | curl -X POST -H "Content-Type: application/json" -d @- $TEAMS_WEBHOOK_URL
 
       # - name: Run Python script
       #   run: python .github/workflows/script.py '${{ toJson(github.event) }}'
