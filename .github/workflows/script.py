@@ -1,4 +1,4 @@
-import json
+import json, sys
 from typing import List, Dict
 
 def get_message(payload: Dict) -> Dict:
