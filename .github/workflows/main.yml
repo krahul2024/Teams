@@ -12,8 +12,16 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
+      - name: Serialize and store GitHub event payload
+        run: echo "::set-secrets payload=${{ toJson(github.event) }}"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Get GitHub event payload from secret
+        run: echo "$GITHUB_EVENT_PAYLOAD" > payload.json
+
       - name: Send notification to Teams
         env:
           TEAMS_WEBHOOK_URL: ${{ secrets.webhook_secret }}
         run: |
-          python .github/workflows/script.py '${{toJson(github.event)}}' > /dev/null 2>&1 | curl -X POST -H "Content-Type: application/json" -d @- $TEAMS_WEBHOOK_URL
+          python .github/workflows/script.py './payload.json' | curl -X POST -H "Content-Type: application/json" -d @- $TEAMS_WEBHOOK_URL
