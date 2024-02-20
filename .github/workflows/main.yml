@@ -15,6 +15,5 @@ jobs:
       - name: Send notification to Teams
         env:
           TEAMS_WEBHOOK_URL: ${{ secrets.webhook_secret }}
-          GITHUB_EVENT_PAYLOAD: ${{ toJson(github.event) }}
         run: |
-          python .github/workflows/script.py "${{GITHUB_EVENT_PAYLOAD}}" | curl -X POST -H "Content-Type: application/json" -d @- $TEAMS_WEBHOOK_URL
+          python .github/workflows/script.py '${{toJson(github.event)}}' > /dev/null 2>&1 | curl -X POST -H "Content-Type: application/json" -d @- $TEAMS_WEBHOOK_URL
