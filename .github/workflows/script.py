@@ -126,5 +126,6 @@ def get_message(payload: Dict) -> Dict:
 if __name__ == "__main__":
     event_data = sys.argv[1]
     event_data_json = json.loads(event_data)
-    message = get_message(event_data_json)
-    print(json.dumps(message, indent=4))  
+    # message = get_message(event_data_json
+    # print(json.dumps(message, indent=4))  
+    print(event_data_json)
