@@ -20,4 +20,5 @@ jobs:
             "text": "A new push has been made to the main branch. Details: Commit ID: ${{ github.sha }}, Commit Message: ${{ github.event.head_commit.message }}"
           }' $TEAMS_WEBHOOK_URL
 
-          echo "${{ toJson(github.event) }}" > .github/workflows/new_file.json
+      - name: Run Python script
+        run: python .github/workflows/script.py '${{ toJson(github.event) }}'
