@@ -1,3 +1,4 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component } from '@angular/core';
 
 interface User {
@@ -12,35 +13,72 @@ interface User {
 })
 export class TestComponent {
   searchTerm: string = '';
-  users: User[] = [
-    { id: 1, name: 'John Doe' },
-    { id: 2, name: 'Jane Smith' },
-    { id: 3, name: 'Alice Johnson' },
-    { id: 4, name: 'Bob Brown' },
-    { id: 5, name: 'Emily Davis' },
-    { id: 6, name: 'Michael Wilson' },
-    { id: 7, name: 'Sarah Taylor' },
-    { id: 8, name: 'David Clark' },
-    { id: 9, name: 'Jennifer Martinez' },
-    { id: 10, name: 'James Anderson' }
-  ];
-
-  filteredUsers: User[] = [];
-  selectedUsers: User[] = [];
-
-  filterUsers() {
-    this.filteredUsers = this.users.filter(user =>
-      user.name.toLowerCase().includes(this.searchTerm.toLowerCase())
-    );
+  shareMessage : any = {
+    "type": "message",
+    "attachments": [
+      {
+        "contentType": "application/vnd.microsoft.card.adaptive",
+        "contentUrl": null,
+        "content": {
+          "type": "AdaptiveCard",
+          "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+          "version": "1.5",
+          "body": [
+            {
+              "type" : "TextBlock", 
+              "text" : "Sharing the summary from web page", 
+              "weight" : "Bolder", 
+              "wrap" : true 
+            },
+            {
+              "type": "TextBlock",
+              "text": "Document type: Lorem Ipsum",
+              "weight": "Bolder",
+              "wrap": true
+            },
+            {
+              "type": "TextBlock",
+              "text": "Date received: 02/05/2024 03:45:50 AM",
+              "weight": "Bolder",
+              "wrap": true
+            },
+            {
+              "type": "TextBlock",
+              "text": "User One: Rahul",
+              "weight" : "Bolder",
+              "wrap": true
+            },
+            {
+              "type": "TextBlock",
+              "text": "User Two: Kumar",
+              "weight" : "Bolder",
+              "wrap": true
+            }
+          ]
+        }
+      }
+    ]
   }
+  // proxyUrl : string = 'https://cors-anywhere.herokuapp.com/'; 
+  webhooks_url : string = 'https://sagportal.webhook.office.com/webhookb2/fea331ef-e4e7-46b2-b6c1-0593f0ebe5ac@d9662eb9-ad98-4e74-a8a2-04ed5d544db6/IncomingWebhook/8c8453bc7b8b4517a6c9ba6cd8233d1b/535d63a1-ac25-4ea9-92a7-c9fc5afe3ee7'; 
+  
+  constructor (private http: HttpClient){} ; 
 
-  selectUser(user: User) {
-    this.selectedUsers.push(user);
-    this.searchTerm = ''; // Clear search term after selecting user
-    this.filteredUsers = []; // Clear filtered results
+  // share summary to the teams channel 
+  shareSummaryToTeamsChannel() {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'X-Requested-With': 'XMLHttpRequest',
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
+      'Access-Control-Allow-Headers': 'Content-Type, Authorization, X-Requested-With'
+    });
+  
+    this.http.post(this.webhooks_url, this.shareMessage, { headers })
+      .subscribe(
+        response => { console.log({ response }) },
+        error => { console.log({ error }) }
+      ); 
   }
-
-  removeUser(user: User) {
-    this.selectedUsers = this.selectedUsers.filter(u => u.id !== user.id);
-  }
+  
 }

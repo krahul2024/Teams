@@ -7,7 +7,7 @@ import { TestComponent } from './components/test/test.component';
 const routes: Routes = [
   {path : 'modal', title : 'Modal Form', component : ModalFormComponent }, 
   { path : 'test', title : 'User List testing', component : TestUserListComponent},
-  { path : 'test-search', title : 'User Test Search', component : TestComponent}
+  { path : 'share-summary', title : 'User Test Search', component : TestComponent}
 ];
 
 @NgModule({

@@ -1,0 +1,6 @@
+{
+    "/webhookb2" : {
+        "target" : "https://sagportal.webhook.office.com", 
+        "secure" : false
+    }
+}
