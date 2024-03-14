@@ -1,7 +1,6 @@
 import { Component, ElementRef, HostListener, OnInit, ViewChild, numberAttribute } from '@angular/core';
 import { users as Users } from '../../../assets/data'; // @ts-ignore 
 import { User } from 'src/app/interfaces/user.ts';
-import { timeout } from 'rxjs';
 
 @Component({
   selector: 'app-modal-form',
@@ -10,10 +9,10 @@ import { timeout } from 'rxjs';
 })
 export class ModalFormComponent implements OnInit {
 
-  @ViewChild('modalBody') modalRef! : ElementRef; 
-  @ViewChild('modalOpen') modalOpenButtonRef! : ElementRef; 
+  @ViewChild('modalBody') modalRef!: ElementRef;
+  @ViewChild('modalOpen') modalOpenButtonRef!: ElementRef;
 
-  showModal: boolean = true ;
+  showModal: boolean = true;
   enableShare: boolean = false;
   cancelSharing: boolean = false;
   includeAttachments: boolean = false;
@@ -28,12 +27,12 @@ export class ModalFormComponent implements OnInit {
   filteredUsers: User[] = [];
   selectedUsers: User[] = [];
   isTextareaFocused: boolean = false;
-  focusedOnFilteredList = false ; 
+  focusedOnFilteredList = false;
 
-  constructor(private elementRef: ElementRef){} 
+  constructor(private elementRef: ElementRef) { }
 
   ngOnInit(): void {
-      
+
   }
 
   filterUser(): void {
@@ -59,21 +58,21 @@ export class ModalFormComponent implements OnInit {
     // if(!this.focusedOnFilteredList)this.searchTerm = ""; 
   }
 
-  onMouseEnter(){
+  onMouseEnter() {
     console.log('Mouse entered')
-    this.focusedOnFilteredList = true ; 
+    this.focusedOnFilteredList = true;
   }
 
-  onMouseLeave(){
-    this.focusedOnFilteredList = false ; 
+  onMouseLeave() {
+    this.focusedOnFilteredList = false;
     console.log('Mouse left the area')
   }
 
-  shareWithDivFocus(){
+  shareWithDivFocus() {
     console.log('share with div focused')
   }
 
-  shareWithDivBlur(){
+  shareWithDivBlur() {
     console.log('Share with div blurred')
   }
 
@@ -193,7 +192,7 @@ export class ModalFormComponent implements OnInit {
 
   //---------------Share the message to teams
 
-  shareToTeams(message : any){
+  shareToTeams(message: any) {
   }
-  
+
 }
